@@ -5,7 +5,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.stragegy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersService } from 'src/users/users.service';
 import { UsersModule } from 'src/users/users.module';
 import { LocalStrategy } from './local.strategy';
 
@@ -17,7 +16,7 @@ import { LocalStrategy } from './local.strategy';
       imports: [ConfigModule], // Importa ConfigModule para acesso ao ConfigService
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'), // Obtém a chave secreta a partir do ConfigService
-        signOptions: { expiresIn: '60s' },
+        signOptions: { expiresIn: '6h' },
       }),
       inject: [ConfigService], // Injeta ConfigService
     }),
